@@ -24,22 +24,22 @@ WHERE
 SELECT
 	CASE
 		WHEN citation_number IN ('27454', 
-								'27456', 
-								'27576', 
-								'27577', 
-								'27579', 
-								'27580', 
-								'27581', 
-								'27578',
-								'25440',
-								'25546',
-								'25547',
-								'25630',
-								'25631',
-								'26113',
-								'26116',
-								'26156',
-								'26307') AND date < '12/31/2020' THEN citation_number + '-1'
+					 '27456', 
+					 '27576', 
+					 '27577', 
+					 '27579', 
+					 '27580', 
+					 '27581', 
+					 '27578',
+					 '25440',
+					 '25546',
+					 '25547',
+					 '25630',
+					 '25631',
+					 '26113',
+					 '26116',
+					 '26156',
+					 '26307') AND date < '12/31/2020' THEN citation_number + '-1'
 		ELSE citation_number
 	END AS 'citation_number',
 	CASE
@@ -48,14 +48,13 @@ SELECT
 			OR citation_number LIKE '1%' 
 			OR citation_number LIKE 'T%' 
 			OR citation_number LIKE 'B%' THEN 'TEEP'
-		WHEN citation_number LIKE 'S%'		THEN 'SA'
+		WHEN citation_number LIKE 'S%'	THEN 'SA'
 		ELSE 'Error'
 	END AS 'type',
 	date,
 	location,
 	latitude,
 	longitude
-	--,ROW_NUMBER() OVER (partition BY citation_number ORDER BY citation_number DESC) AS 'incident_count'
 
 FROM
 	citations
