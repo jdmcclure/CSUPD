@@ -1,4 +1,4 @@
-DECLARE @ThreeYearsAgo DATE = DATEADD(MONTH, -42, GETDATE())
+DECLARE @ThreeYearsAgo DATE = DATEADD(YEAR, -3, GETDATE())
 
 ;WITH cad_incidents AS(
 SELECT
