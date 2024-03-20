@@ -1,4 +1,34 @@
-DECLARE @ThreeYearsAgo DATE = DATEADD(YEAR, -3, DATEADD(YEAR, DATEDIFF(YEAR, 0, GETDATE()), 0))
+/* 
+The goal of this query is to pull each unique incident, identified by a unique incident number, and transform
+this information into a dimension table used within Power BI.
+
+The query only pulls data for the last 3 years up to the current date. Additionally, it pulls data to include
+the entire current semester 3 years ago for accuracy and proper comparison. i.e. - If today is 03/20/2024 it
+will pull data going all the way back to 01/01/2021 to include the entire Spring Semester 2021. If the date 
+is 05/20/2024 it will pull data going back to 05/16/2021 to include the entire Summer Semester 2021.
+*/
+-- Declare variables for including the daterange described above.
+-- Declare the year of today's date
+DECLARE @current_year INT = YEAR(GETDATE())
+-- Declare today's date
+DECLARE @current_date DATE = GETDATE()
+-- Declare the day of the year of current_date starting at 1 (instead of 0)
+DECLARE @day_of_year INT = DATEDIFF(DAY, CAST(@current_year AS CHAR(4)) + '-01-01', @current_date) + 1
+-- Declare the current year -3 as an integer
+DECLARE @three_years_ago INT = @current_year - 3
+-- Declare the date for the end of each semester based on the day in year
+DECLARE @semester_end_date DATE
+
+IF @day_of_year < 136
+	-- If the current_date day in year is less than 136 set the date as "01/01/(three_years_ago)"
+    SET @semester_end_date = CAST(@three_years_ago AS CHAR(4)) + '-01-01'
+	--Otherwise, if the current_date day in year is greater than or equal to 136
+	-- set the date as "05/15/(three_years_ago)"
+ELSE IF @day_of_year >= 136 AND @day_of_year <= 228
+    SET @semester_end_date = CAST(@three_years_ago AS CHAR(4)) + '-05-15'
+	-- If it doesn't meet either of the above criteria, set the date for "08/15/(three_years_ago)"
+ELSE
+    SET @semester_end_date = CAST(@three_years_ago AS CHAR(4)) + '-08-15'
 
 ;WITH cad_incidents AS(
 SELECT
