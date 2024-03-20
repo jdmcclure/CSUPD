@@ -226,7 +226,7 @@ WHERE
 	NOT(Master_Incident_Number IS NULL 
 		OR Master_Incident_Number = '')
 	AND
-	Response_Date > @ThreeYearsAgo
+	Response_Date > (SELECT TOP 1 Response_Date FROM Reporting_System.dbo.Response_Master_Incident WHERE Response_Date <= @current_date AND Response_Date >= @semester_end_date ORDER BY Response_Date ASC)
 	AND
 	problem NOT IN ('TEST CALL', '_Blank', '1610Am Radio', 'On Foot')
 )
