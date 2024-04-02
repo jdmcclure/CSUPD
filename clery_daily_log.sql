@@ -314,10 +314,5 @@ FROM
 	incidents
 WHERE
 	Description NOT IN ('Traffic Violation', 'Error/Cancelled')
-<<<<<<< HEAD
-=======
-	--AND
-	--incident_count % 2 <> 0
->>>>>>> a848c6b5275045e9431d99f30198b89b1c69ba19
 ORDER BY
 	Case_n;
