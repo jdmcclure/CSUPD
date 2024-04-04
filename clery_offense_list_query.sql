@@ -110,7 +110,7 @@ WHERE
 		OR IncidentEvent.address_streetAddress LIKE '%2150 Centre%'
 		OR IncidentEvent.address_streetAddress LIKE '%2301 Research%'
 		OR IncidentEvent.address_streetAddress LIKE '%2243 Center%'  -- Crabtree Hall
-		OR IncidentEvent.address_streetAddress LIKE '%6432 Grand Tree%'  -- Harmoney Center Golf Practice Facility
+		OR IncidentEvent.address_streetAddress LIKE '%6432 Grand Tree%'  -- Harmony Center Golf Practice Facility
 		OR IncidentEvent.address_streetAddress LIKE '%16321 W CR 44H%'  -- Mountain Campus
 		OR IncidentEvent.address_streetAddress LIKE '%4825 W CR 52E%'  -- Tamasag
 		OR IncidentEvent.address_streetAddress LIKE '%223 S Shields%'  -- ECC
