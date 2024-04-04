@@ -1,9 +1,9 @@
 /*
 This report pulls all live incidents in CAD for CSUPD, LCSO, and FCPS.
-I have it ordered by agency so that CSU officers always appear at the top.
+It is ordered by agency ascending so that CSU officers always appear at the top.
 To prevent unit overload from other agencies during large incidents, I have made it so that LCSO and FCPS
-incidents show only the primary officer and incident. In contrast, every CSUPD officer will show on screen
-regardless of whether they are on the same call or not.
+incidents show only the primary officer and incident (FCPS and LCSO will always show only one unit per incident).
+In contrast, every CSUPD officer will show on screen regardless of whether they are on the same call or not.
 */
 WITH incidents AS
 	(SELECT
