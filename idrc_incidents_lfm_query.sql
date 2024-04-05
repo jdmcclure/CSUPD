@@ -18,7 +18,7 @@ FROM
 		INNER JOIN Response_Vehicles_Assigned RVeh	
 			ON	RMI.ID = RVeh.Master_Incident_ID
 WHERE
-    RMI.Location_Name IN ('IDRC')
+    RMI.Location_Name = 'IDRC'
     AND
     MONTH(RMI.Response_Date) = MONTH(@Today)-1
 )
