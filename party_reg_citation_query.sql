@@ -19,5 +19,7 @@ INNER JOIN InformRMSSummaries.Reporting.ArrestEvent AS AE
     ON A.Id = AE.Arrest_Id
 WHERE 
     AE.startDate >= DATEADD(DAY, -7, GETDATE())
-    AND (AC.ViolationCodeReference_Description LIKE 'FC-17-129%' OR AC.ViolationCodeReference_Description LIKE 'FC-17-131%')
-    AND (A.AgencyName LIKE 'CSU%' OR A.AgencyName LIKE 'FORT%' OR A.AgencyName LIKE 'LARIMER%');
+    AND 
+    (AC.ViolationCodeReference_Description LIKE 'FC-17-129%' OR AC.ViolationCodeReference_Description LIKE 'FC-17-131%')
+    AND 
+    (A.AgencyName LIKE 'CSU%' OR A.AgencyName LIKE 'FORT%' OR A.AgencyName LIKE 'LARIMER%');

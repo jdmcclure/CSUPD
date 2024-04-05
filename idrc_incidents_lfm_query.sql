@@ -36,4 +36,4 @@ FROM
 WHERE
     incident_count = 1
 ORDER BY
-    [Response Date] ASC
+    [Response Date] ASC;
