@@ -28,8 +28,8 @@ SELECT
     ,Problem
     ,Unit
     ,[Address]
-    ,Location_Name
-    ,mins_on_call
+    ,Location_Name AS 'Location Name'
+    ,mins_on_call AS 'Mins on Call'
 
 FROM
     idrc_incidents
