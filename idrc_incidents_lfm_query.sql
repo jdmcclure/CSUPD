@@ -4,11 +4,11 @@ SELECT
     RMI.Master_Incident_Number AS 'Incident'
     ,Response_Date AS 'Response Date'
     ,Case
-        WHEN Problem LIKE '%EXTRA PATRO%' THEN 'Extra Patrol'
+        WHEN Problem LIKE '%Extra Patro%' THEN 'Extra Patrol'
         WHEN Problem LIKE '%Directed Patro%' THEN 'Directed Patrol'
-        ELSE Problem
+        ELSE UPPER(LEFT(Problem,1)) + LOWER(RIGHT(Problem, LEN(Problem)-1))
     END AS 'Problem'
-    ,RVeh.Radio_Name AS 'Officer'
+    ,RVeh.Radio_Name AS 'Unit'
     ,RMI.Address
     ,RMI.Location_Name
     ,DATEDIFF(s, RVeh.Time_Assigned, RVeh.Time_Call_Cleared)/60.0 AS 'mins_on_call'
@@ -18,14 +18,19 @@ FROM
 		INNER JOIN Response_Vehicles_Assigned RVeh	
 			ON	RMI.ID = RVeh.Master_Incident_ID
 WHERE
-    RMI.Address LIKE '3185 Rampart%'
-    AND 
-    NOT(RMI.location_name LIKE 'CDC')
+    RMI.Location_Name IN ('IDRC')
     AND
     MONTH(RMI.Response_Date) = MONTH(@Today)-1
 )
 SELECT
-    *
+    Incident
+    ,FORMAT([Response Date], 'MM/dd/yyyy HH:mm') AS "Response Date"
+    ,Problem
+    ,Unit
+    ,[Address]
+    ,Location_Name
+    ,mins_on_call
+
 FROM
     idrc_incidents
 WHERE
