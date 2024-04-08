@@ -146,6 +146,4 @@ SELECT
 FROM
 	incidents
 WHERE
-	incident_count = 1
-	AND
-	date_impounded >= '01/01/2024';
+	incident_count = 1;
