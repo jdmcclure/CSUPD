@@ -1,3 +1,4 @@
+-- A query that pulls bike thefts entered into the RMS system in the last 30 days.
 SELECT
 	CaseNumber AS 'Case_No'
 	,dateReported AS 'Reported_Date'
