@@ -130,7 +130,7 @@ WHERE
 	AND
 	OE.Number LIKE '%IMP%'
 	AND
-	OEP.ReleaseDate > '12/31/2023'
+	OEP.ReleaseDate IS NULL
 )
 SELECT
 	number

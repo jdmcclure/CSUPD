@@ -1,4 +1,4 @@
-USE InformRMSSummaries;
+USE InformRMSReports;
 WITH incidents AS(
 SELECT
 	OE.Number AS 'number'
@@ -119,6 +119,7 @@ SELECT
 	,OEP.serial AS 'serial'
 	,OEP.ReleaseDate AS 'release_date'
 	,OEP.registrationNumber AS 'registration_number'
+    ,ReleasedTo_Description AS 'released_to'
 	,ROW_NUMBER() OVER (partition BY OE.Number ORDER BY OE.Number) AS 'incident_count'
 FROM
 	Reporting.OtherEvent OE
@@ -132,6 +133,10 @@ WHERE
 	OE.Number LIKE '%IMP%'
 	AND
 	OEP.ReleaseDate > '12/31/2023'
+    AND
+    OEP.ReleasedTo_Description IS NOT NULL
+    AND
+    OE.IsSupplement = 1
 )
 SELECT
 	number
@@ -140,11 +145,12 @@ SELECT
 	,location
 	,date_impounded
 	,release_date
-	,DATEDIFF(dd, date_impounded, GETDATE()) AS 'days_in_impound'
+	,DATEDIFF(dd, release_date, GETDATE()) AS 'days_since_release'
 	,brand
 	,color
 	,serial
 	,registration_number
+    ,released_to
 FROM
 	incidents
 WHERE

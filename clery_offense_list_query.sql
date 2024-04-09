@@ -1,7 +1,7 @@
 DECLARE @begin AS datetime
 DECLARE @end AS datetime
-set @begin = '01/01/2023'
-set @end = '12/31/2023'
+set @begin = '01/01/2024'
+set @end = '01/31/2024'
 
 SELECT
 	Incident.CaseNumber AS 'case'
