@@ -128,15 +128,13 @@ FROM
 	INNER JOIN Reporting.OtherEventProperty OEP
 		ON OE.Id = OEP.OtherEvent_Id
 WHERE
-	OEE.startDate > DATEADD(MILLISECOND, -3, '01/01/2021')
-	AND
 	OE.Number LIKE '%IMP%'
 	AND
 	OEP.ReleaseDate > '12/31/2023'
     AND
-    OEP.ReleasedTo_Description IS NOT NULL
+    OEP.ReleaseDate IS NOT NULL
     AND
-    OE.IsSupplement = 1
+    NOT(OE.SequenceNotation = '.0')
 )
 SELECT
 	number
