@@ -19,7 +19,6 @@ FROM
 			ON Incident.Id = IncidentOffense.Incident_Id
 
 WHERE
-	--YEAR(IncidentEvent.dateReported) = '2022'
 	IncidentEvent.dateReported >= @begin
 	AND
 	IncidentEvent.dateReported <= @end

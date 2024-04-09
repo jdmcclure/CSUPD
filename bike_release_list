@@ -2,6 +2,7 @@ USE InformRMSSummaries;
 WITH incidents AS(
 SELECT
 	OE.Number AS 'number'
+    ,OEP.cCICNumber AS 'ccic'
 	,OE.CaseNumber AS 'case_number'
 	,CASE
 		WHEN address_streetAddress LIKE '800 W Pitkin%' THEN 'AV - Aspen Hall'
@@ -135,6 +136,7 @@ WHERE
 SELECT
 	number
 	,case_number
+    ,ccic
 	,location
 	,date_impounded
 	,release_date
