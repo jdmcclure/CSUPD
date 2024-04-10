@@ -130,6 +130,7 @@ SELECT
     	WHEN IncidentOffense.ViolationCodeReference_Description LIKE '18-3-302%' THEN 'Kidnapping'
 		WHEN IncidentOffense.ViolationCodeReference_Description LIKE 'LC-98-02%' THEN 'Possession of Tobacco by Minors'
     	WHEN IncidentOffense.ViolationCodeReference_Description LIKE '18-6-701%' THEN 'Contributing to the Delinquency of a Minor'
+		WHEN IncidentOffense.ViolationCodeReference_Description LIKE 'FC-17-3%' THEN 'Failure to Appear'
 		ELSE IncidentOffense.ViolationCodeReference_Description
 	END AS 'Description'
 	,Incident.CaseNumber AS 'Case_n'

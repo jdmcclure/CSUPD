@@ -188,7 +188,9 @@ WHERE
 	OR IncidentOffense.ViolationCodeReference_Code LIKE '18-18-0403%'
 	OR IncidentOffense.ViolationCodeReference_Code LIKE '18-18-405%'
 	OR IncidentOffense.ViolationCodeReference_Code LIKE '18-18-0405%'
-	OR IncidentOffense.ViolationCodeReference_Code LIKE '12-47-901%'  --Alcohol Offenses(10)
+	OR IncidentOffense.ViolationCodeReference_Code LIKE '12-47-901%'  --Alcohol Offenses(12)
+	OR IncidentOffense.ViolationCodeReference_Code LIKE '12-47-903%'
+	OR IncidentOffense.ViolationCodeReference_Code LIKE '12-48-108%'
 	OR IncidentOffense.ViolationCodeReference_Code LIKE '18-13-122%'
 	OR IncidentOffense.ViolationCodeReference_Code LIKE '18-13-0122%'
 	OR IncidentOffense.ViolationCodeReference_Code LIKE '42-4-1305%'
