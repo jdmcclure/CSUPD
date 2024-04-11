@@ -1,7 +1,7 @@
 -- A query that pulls bike thefts entered into the RMS system in the last 30 days.
 SELECT
-	CaseNumber AS 'Case_No'
-	,dateReported AS 'Reported_Date'
+	CaseNumber AS 'case'
+	,dateReported AS 'reported_date'
 	,CASE
 		WHEN address_streetAddress = '800 W PITKIN ST' THEN 'AV-Aspen Hall'
 		WHEN address_streetAddress = '820 W PITKIN ST' THEN 'AV-Commons'
@@ -68,12 +68,12 @@ SELECT
 		WHEN address_streetAddress = '950 W Plum St' THEN 'Durrell Center'
 		WHEN address_streetAddress = '1231 Libbie Coy Way' THEN 'NESB'
 		ELSE address_streetAddress
-		END AS 'Location'
+		END AS 'location'
 	,IncidentEvent.callNumber AS 'incident'
-	,FORMAT(startDate, 'MM/dd/yyyy') as 'From_Date'
-	,FORMAT(startDate, 'HH:mm') as 'From_Time'
-	,FORMAT(endDate, 'MM/dd/yyyy') AS 'To_Date'
-	,FORMAT(endDate, 'HH:mm') AS 'To_Time'
+	,FORMAT(startDate, 'MM/dd/yyyy') as 'from_date'
+	,FORMAT(startDate, 'HH:mm') as 'from_time'
+	,FORMAT(endDate, 'MM/dd/yyyy') AS 'to_date'
+	,FORMAT(endDate, 'HH:mm') AS 'to_time'
 	,CASE
 		WHEN endDate IS NOT NULL THEN DATEADD(SECOND, DATEDIFF(SECOND,startDate, endDate)/2, startDate)
 		ELSE startDate
@@ -90,8 +90,8 @@ SELECT
 		WHEN IncidentNarrative.text LIKE '%Unlocked%' THEN 'Unlocked'
 		WHEN IncidentNarrative.text LIKE '%Not Locked%' THEN 'Unlocked'
 		ELSE 'Unknown'
-		END AS 'Lock Type'
-	,IncidentProperty.make_Description AS 'Brand'
+		END AS 'lock_type'
+	,IncidentProperty.make_Description AS 'brand'
 	,CASE 
         WHEN CHARINDEX(',', Color) > 0 THEN 
             LEFT(Color, CHARINDEX(',', Color) - 1)
@@ -108,7 +108,7 @@ SELECT
             Color    
     END AS Color
 	,'$' + convert(varchar(50), CAST(IncidentProperty.value as money), -1) AS 'Value'
-	,'False' AS 'Recovered'
+	,'False' AS 'recovered'
 FROM
 	InformRMSReports.Reporting.CSUPOLICEDEPARTMENT_Incident Incident
 	INNER JOIN InformRMSReports.Reporting.CSUPOLICEDEPARTMENT_IncidentEvent IncidentEvent
