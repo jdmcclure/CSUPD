@@ -7,8 +7,14 @@ SELECT
 	V.Time_ArrivedAtScene AS 'arrived',
 	V.Time_Call_Cleared AS 'cleared',
 	V.Elapsed_Assigned_2_Enroute AS 'delay',
-	DATEDIFF(s, V.Time_Assigned, V.Time_ArrivedAtScene) AS 'response_secs',
-	DATEDIFF(s, V.Time_Assigned, V.Time_Call_Cleared) AS 'total_secs',
+	CASE
+		WHEN DATEDIFF(s, V.Time_Assigned, V.Time_ArrivedAtScene) < 0 THEN NULL
+		ELSE DATEDIFF(s, V.Time_Assigned, V.Time_ArrivedAtScene)
+	END AS 'response_secs',
+	CASE
+		WHEN DATEDIFF(s, V.Time_Assigned, V.Time_Call_Cleared) < 0 THEN NULL
+		ELSE DATEDIFF(s, V.Time_Assigned, V.Time_Call_Cleared)
+	END AS 'total_secs',
 	V.Elapsed_Assigned_2_Clear AS 'time_on_call',
 	PrimaryVehicleFlag AS 'primary_flag'
 FROM

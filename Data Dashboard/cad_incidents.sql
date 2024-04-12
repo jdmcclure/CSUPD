@@ -171,8 +171,14 @@ SELECT
 	,YEAR(Response_Date) AS 'year'
 	,Time_CallEnteredQueue AS 'time_call_entered_queue'
 	,Time_First_Unit_Arrived AS 'time_first_unit_arrived'
-	,DATEDIFF(s, Time_CallEnteredQueue, Time_First_Unit_Arrived) AS 'response_secs'
-	,DATEDIFF(s, Time_CallEnteredQueue, Time_First_Unit_Arrived)/60.0 AS 'response_mins'
+	,CASE
+		WHEN DATEDIFF(s, Time_CallEnteredQueue, Time_First_Unit_Arrived) < 0 THEN NULL
+		ELSE DATEDIFF(s, Time_CallEnteredQueue, Time_First_Unit_Arrived)
+	END AS 'response_secs'
+	,CASE
+		WHEN DATEDIFF(s, Time_CallEnteredQueue, Time_First_Unit_Arrived) < 0 THEN NULL
+		ELSE DATEDIFF(s, Time_CallEnteredQueue, Time_First_Unit_Arrived)/60.0
+	END AS 'response_mins'
 	,CASE
 		WHEN DATEDIFF(s, Time_CallEnteredQueue, Time_First_Unit_Arrived) < 0 THEN 'exclude'
 		ELSE 'accurate'
