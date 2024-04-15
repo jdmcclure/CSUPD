@@ -1,4 +1,4 @@
-USE InformRMSReports;
+USE InformRMSSummaries;
 WITH incidents AS(
 SELECT
 	OE.Number AS 'number'
@@ -133,8 +133,8 @@ WHERE
 	OEP.ReleaseDate > '12/31/2023'
     AND
     OEP.ReleaseDate IS NOT NULL
-    AND
-    NOT(OE.SequenceNotation = '.0')
+    --AND
+    --NOT(OE.SequenceNotation = '.0')
 )
 SELECT
 	number
