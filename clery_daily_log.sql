@@ -32,6 +32,7 @@ SELECT
 		WHEN IncidentOffense.ViolationCodeReference_Description LIKE '1409(2)%' THEN 'Traffic Violation'
 		WHEN IncidentOffense.ViolationCodeReference_Description LIKE '%DROVE WRONG WAY%' THEN 'Traffic Violation'
 		WHEN IncidentOffense.ViolationCodeReference_Description LIKE '%Possessed (Fictitiou%' THEN 'False ID'
+		WHEN IncidentOffense.ViolationCodeReference_Description LIKE '%FC-17-70%' THEN 'False ID'
 		WHEN IncidentOffense.ViolationCodeReference_Description LIKE '%Bodily Waste%' THEN 'Depositing Bodily Waste'
 		WHEN IncidentOffense.ViolationCodeReference_Description LIKE '%Fire Agency%' THEN 'Assist to Fire Dept'
 		WHEN IncidentOffense.ViolationCodeReference_Description LIKE '%Fire Authority%' THEN 'Assist to Fire Dept'
@@ -131,7 +132,7 @@ SELECT
 		WHEN IncidentOffense.ViolationCodeReference_Description LIKE 'LC-98-02%' THEN 'Possession of Tobacco by Minors'
     	WHEN IncidentOffense.ViolationCodeReference_Description LIKE '18-6-701%' THEN 'Contributing to the Delinquency of a Minor'
 		WHEN IncidentOffense.ViolationCodeReference_Description LIKE 'FC-17-3%' THEN 'Failure to Appear'
-		ELSE IncidentOffense.ViolationCodeReference_Description
+		ELSE UPPER(LEFT(IncidentOffense.ViolationCodeReference_Description, 1)) + LOWER(RIGHT(IncidentOffense.ViolationCodeReference_Description, LEN(IncidentOffense.ViolationCodeReference_Description)-1))
 	END AS 'Description'
 	,Incident.CaseNumber AS 'Case_n'
 	,FORMAT(IncidentEvent.dateReported, 'MM/dd/yyyy HH:mm') AS 'Reported'
