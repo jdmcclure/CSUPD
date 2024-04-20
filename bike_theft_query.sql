@@ -44,7 +44,7 @@ SELECT
 		WHEN address_streetAddress = '555 S HOWES ST' THEN 'HSBC'
 		WHEN address_streetAddress = '821 W PLUM ST' THEN 'Indoor Practice Field'
 		WHEN address_streetAddress = '700 OVAL DR' THEN 'Laurel Hall'
-		WHEN address_streetAddress = '401 W PITKIN' THEN 'Microbiology Building'
+		WHEN address_streetAddress = '401 W PITKIN ST' THEN 'Microbiology Building'
 		WHEN address_streetAddress = '251 UNIVERSITY AV' THEN 'Military Science Building'
 		WHEN address_streetAddress = '951 W PLUM' THEN 'Moby Arena'
 		WHEN address_streetAddress = '1201 CENTER AV' THEN 'Morgan Library'
@@ -107,7 +107,7 @@ SELECT
         ELSE 
             Color    
     END AS Color
-	,'$' + convert(varchar(50), CAST(IncidentProperty.value as money), -1) AS 'Value'
+	,'$' + convert(varchar(50), CAST(IncidentProperty.value AS money), -1) AS 'Value'
 	,'False' AS 'recovered'
 FROM
 	InformRMSReports.Reporting.CSUPOLICEDEPARTMENT_Incident Incident
