@@ -132,6 +132,7 @@ SELECT
 		WHEN IncidentOffense.ViolationCodeReference_Description LIKE 'LC-98-02%' THEN 'Possession of Tobacco by Minors'
     	WHEN IncidentOffense.ViolationCodeReference_Description LIKE '18-6-701%' THEN 'Contributing to the Delinquency of a Minor'
 		WHEN IncidentOffense.ViolationCodeReference_Description LIKE 'FC-17-3%' THEN 'Failure to Appear'
+		WHEN IncidentOffense.ViolationCodeReference_Description LIKE 'FC-17-128%' THEN 'Obstructing a Passageway'
 		ELSE UPPER(LEFT(IncidentOffense.ViolationCodeReference_Description, 1)) + LOWER(RIGHT(IncidentOffense.ViolationCodeReference_Description, LEN(IncidentOffense.ViolationCodeReference_Description)-1))
 	END AS 'Description'
 	,Incident.CaseNumber AS 'Case_n'
