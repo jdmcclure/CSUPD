@@ -8,6 +8,7 @@ SELECT
         WHEN Problem LIKE '%Directed Patro%' THEN 'Directed Patrol'
         ELSE UPPER(LEFT(Problem,1)) + LOWER(RIGHT(Problem, LEN(Problem)-1))
     END AS 'Problem'
+    ,RMI.Call_Disposition AS 'Disposition'
     ,RVeh.Radio_Name AS 'Unit'
     ,RMI.Address
     ,RMI.Location_Name
@@ -26,6 +27,10 @@ SELECT
     Incident
     ,FORMAT([Response Date], 'MM/dd/yyyy HH:mm') AS "Response Date"
     ,Problem
+    ,CASE
+        WHEN Disposition IS NULL THEN 'Completed (CMP)'
+        ELSE Disposition
+    END AS 'Disposition'
     ,Unit
     ,[Address]
     ,Location_Name AS 'Location Name'
