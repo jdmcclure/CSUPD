@@ -133,7 +133,10 @@ SELECT
 		WHEN IncidentOffense.ViolationCodeReference_Description LIKE 'LC-98-02%' THEN 'Possession of Tobacco by Minors'
     	WHEN IncidentOffense.ViolationCodeReference_Description LIKE '18-6-701%' THEN 'Contributing to the Delinquency of a Minor'
 		WHEN IncidentOffense.ViolationCodeReference_Description LIKE 'FC-17-3%' THEN 'Failure to Appear'
+		WHEN IncidentOffense.ViolationCodeReference_Description LIKE '%commit other misde%' THEN 'Criminal Attempt to Commit Other Crime'
+		WHEN IncidentOffense.ViolationCodeReference_Description LIKE '%forgery%' THEN 'Forgery'
 		WHEN IncidentOffense.ViolationCodeReference_Description LIKE 'FC-17-128%' THEN 'Obstructing a Passageway'
+		--WHEN IncidentOffense.ViolationCodeReference_Description LIKE '' THEN ''
 		ELSE UPPER(LEFT(LTRIM(IncidentOffense.ViolationCodeReference_Description), 1)) + LOWER(RIGHT(IncidentOffense.ViolationCodeReference_Description, LEN(IncidentOffense.ViolationCodeReference_Description)-1))
 	END AS 'Description'
 	,Incident.CaseNumber AS 'Case_n'
@@ -145,10 +148,14 @@ SELECT
 	END AS 'Occurred'
 	,CASE
 		--Make location of active sex assault cases confidential
-		WHEN (IncidentEvent.description_Description IN ('^POSXASLT^', 'SEXASSLTFR', 'SEXASSLTFF', 'SEX CRIME', 'Sex Crime')
-			AND (IncidentEvent.status_Description IN ('Active', 'Pending') OR IncidentEvent.status_Description IS NULL))
-			OR (IncidentOffense.ViolationCodeReference_Description LIKE '%Sexual%' 
-			AND (IncidentEvent.status_Description IN ('Active', 'Pending') OR IncidentEvent.status_Description IS NULL)) 
+		WHEN 
+			(IncidentEvent.description_Description IN ('^POSXASLT^', 'SEXASSLTFR', 'SEXASSLTFF', 'SEX CRIME', 'Sex Crime')
+				AND 
+			(IncidentEvent.status_Description IN ('Active', 'Pending') OR IncidentEvent.status_Description IS NULL))
+			OR 
+			(IncidentOffense.ViolationCodeReference_Description LIKE '%Sexual%' 
+				AND 
+			(IncidentEvent.status_Description IN ('Active', 'Pending') OR IncidentEvent.status_Description IS NULL)) 
 			THEN 'Confidential'
 		--Then provide common name for locations
 			--Residence Halls and Apartments
@@ -317,6 +324,6 @@ SELECT
 FROM
 	incidents
 WHERE
-	Description NOT IN ('Traffic Violation', 'Error/Cancelled')
+	Description NOT IN ('Traffic Violation', 'Error/Cancelled', 'Lost Property', 'Found Property', 'Assist to Medical')
 ORDER BY
 	Case_n;
